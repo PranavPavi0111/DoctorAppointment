@@ -197,7 +197,7 @@ class AdminApproveDoctorView(generics.UpdateAPIView):
             serializer = self.get_serializer(doctor, data=request.data, partial=True)
             serializer.is_valid(raise_exception=True)
             self.perform_update(serializer)
-            return Response({"detail": "Doctor approved"}, status=status.HTTP_200_OK)
+            return Response({"detail":"Doctor approved"}, status=status.HTTP_200_OK)
         else:
             return Response({'detail':'invalid user'},status=status.HTTP_401_UNAUTHORIZED)
 
@@ -213,6 +213,7 @@ class AdminViewUserView(viewsets.ReadOnlyModelViewSet):
 
 class AdminDeleteDoctorView(viewsets.ModelViewSet):
     queryset = Doctor.objects.all()
+    serializer_class = AdminRemoveDocSerializer
 
     def destroy(self, request, *args, **kwargs):
         doctor_id = request.data.get('doctor_id')
@@ -261,7 +262,7 @@ class UpdateDiseaseView(generics.UpdateAPIView):
 
 class RemoveDiseaseView(viewsets.ModelViewSet):
     queryset = Disease.objects.all()
-    serializer_class = DiseaseSerializer
+    serializer_class = RemoveDiseaseSerializer
 
     def destroy(self, request, *args, **kwargs):
         disease_id = request.data.get('disease_id')

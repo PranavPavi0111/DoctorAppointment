@@ -139,3 +139,14 @@ class UserFeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
         fields = '__all__'
+
+
+class AdminRemoveDocSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctor
+        fields = ['id']
+
+class RemoveDiseaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model =  Disease
+        fields = ['id']
